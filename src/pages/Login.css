@@ -1,0 +1,213 @@
+.login-page {
+    background-color: #F7F5E6;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* para evitar encostar na borda no celular */
+  }
+  
+  .login-container {
+    background-color: #333A56;
+    padding: 60px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 700px; /* Agora o padrão desktop é maior */
+    text-align: center;
+    color: #AFBDD1;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .login-container .logo img {
+    width: 200px; /* aumentei o tamanho da logo */
+    margin-bottom: 30px;
+  }
+  
+  .login-container h2 {
+    font-weight: normal;
+    margin-bottom: 30px;
+    color: #E5E8E8;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+  }
+  
+  .login-form label {
+    font-weight: bold;
+    color: #E5E8E8;
+  }
+  
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    padding: 14px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  .options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .options .remember {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .options .forgot {
+    cursor: pointer;
+  }
+  
+  .btn-login {
+    background-color: #AFBDD1;
+    color: #333A56;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-login:hover {
+    background-color: #E5E8E8;
+  }
+  
+  .signup-text {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #AFBDD1;
+  }
+  
+  .signup-text span {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  
+/* Responsivo tela login para tablets */
+@media (max-width: 900px) {
+    .login-container {
+      max-width: 500px;
+      padding: 50px;
+    }
+  }
+  
+  /* Responsiv o tela login para celulares */
+  @media (max-width: 600px) {
+    .login-container {
+      max-width: 90%;
+      padding: 40px;
+    }
+  
+    .login-container .logo img {
+      width: 80px; /* diminui um pouco a logo no celular */
+    }
+  }
+  
+  /* Layout geral de fundo */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #F7F5E6;
+}
+
+/* Estilo geral dos Modals */
+.MuiBox-root {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Título do Modal */
+.MuiTypography-h5 {
+  font-weight: bold;
+  color: #333A56;
+}
+
+/* Divider */
+.MuiDivider-root {
+  background-color: #333A56;
+  height: 2px;
+  margin-bottom: 20px;
+}
+
+/* Botão Status */
+.status-button {
+  background-color: #E0F7FA;
+  color: #00796B;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* Inputs */
+.MuiTextField-root {
+  margin-bottom: 16px;
+}
+
+/* Botões padrão */
+.MuiButton-root {
+  border-radius: 12px;
+  font-weight: bold;
+  text-transform: none;
+}
+
+/* Botão "Salvar" */
+.MuiButton-containedPrimary {
+  background-color: #333A56;
+  color: #FFFFFF;
+}
+
+.MuiButton-containedPrimary:hover {
+  background-color: #2A2F45;
+}
+
+/* Botão "Cancelar" */
+.MuiButton-outlinedError {
+  color: #D32F2F;
+  border-color: #D32F2F;
+}
+
+.MuiButton-outlinedError:hover {
+  background-color: rgba(211, 47, 47, 0.1);
+}
+
+/* Upload de Arquivo */
+.MuiButton-contained.MuiButton-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Checkbox */
+.MuiFormControlLabel-root {
+  margin-top: 10px;
+  color: #333A56;
+}
+
+/* Data de abertura */
+.data-abertura {
+  margin-top: 15px;
+  font-style: italic;
+  text-align: right; 
+  color: #555;
+}
+
+/* Responsividade Modal */
+@media (max-width: 600px) {
+  .MuiBox-root {
+    width: 90% !important;
+  }
+}

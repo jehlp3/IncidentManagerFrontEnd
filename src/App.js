@@ -1,20 +1,30 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Chamados from './pages/Chamados';
 import ChamadoDetalhes from './pages/ChamadoDetalhes';
 import CadastroUsuario from './pages/CadastroUsuario';
 import { AuthProvider } from './context/AuthContext';
+import Layout from './components/Layout';
+
+// IMPORTAR novos componentes
+import RelatorioChamados from './pages/RelatorioChamados';
+import RelatorioUsuarios from './pages/RelatorioUsuarios';
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Login />} />
+          {/* Página inicial: Login sem Header e Sidebar */}
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/chamados" element={<Chamados />} />
-          <Route path="/chamados/:id" element={<ChamadoDetalhes />} />
-          <Route path="/usuarios/novo" element={<CadastroUsuario />} />
+
+          {/* Rotas protegidas: com Header e Sidebar */}
+          <Route path="/chamados" element={<Layout><Chamados /></Layout>} />
+          <Route path="/chamados/:id" element={<Layout><ChamadoDetalhes /></Layout>} />
+          <Route path="/usuarios/novo" element={<Layout><CadastroUsuario /></Layout>} />
+          <Route path="/relatorios/chamados" element={<Layout><RelatorioChamados /></Layout>} />
+          <Route path="/relatorios/usuarios" element={<Layout><RelatorioUsuarios /></Layout>} />
         </Routes>
       </AuthProvider>
     </Router>
