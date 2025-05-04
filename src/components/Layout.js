@@ -1,4 +1,5 @@
 // src/components/Layout.js
+//Layout diz respeito ao menu lateral existente
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import './Layout.css';
