@@ -308,7 +308,7 @@ export default function NovoChamadoModal({ open, handleClose }) {
 
         <Typography mt={3} display="flex" justifyContent="flex-end" gap={2}>
           <Button variant="outlined" color="error" onClick={handleClose}>
-            Cancelar
+            Voltar
           </Button>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             Salvar

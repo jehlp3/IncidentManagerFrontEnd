@@ -1,10 +1,10 @@
 // src/components/Layout.js
-//Layout diz respeito ao menu lateral existente
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import './Layout.css';
 import headerLogo from '../assets/header.png'; // Logo do cabeçalho
 import NovoChamadoModal from '../pages/NovoChamadoModal';
+import NovoUsuarioModal from '../pages/NovoUsuarioModal'; // Novo modal de usuário
 
 function Layout({ children }) {
   const [openMenu, setOpenMenu] = useState({
@@ -17,7 +17,8 @@ function Layout({ children }) {
     setOpenMenu((prev) => ({ ...prev, [menu]: !prev[menu] }));
   };
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openChamadoModal, setOpenChamadoModal] = useState(false);
+  const [openUsuarioModal, setOpenUsuarioModal] = useState(false); // novo estado
 
   return (
     <div className="layout">
@@ -26,10 +27,12 @@ function Layout({ children }) {
       </header>
       <div className="main">
         <aside className="sidebar">
-        <button onClick={() => setOpenModal(true)} className="btn-novo-chamado">
-          + Novo Chamado
-          <NovoChamadoModal open={openModal} handleClose={() => setOpenModal(false)} />
-        </button>
+          <button onClick={() => setOpenChamadoModal(true)} className="btn-novo-chamado">
+            + Novo Chamado
+          </button>
+          <NovoChamadoModal open={openChamadoModal} handleClose={() => setOpenChamadoModal(false)} />
+          <NovoUsuarioModal open={openUsuarioModal} handleClose={() => setOpenUsuarioModal(false)} />
+
           <nav>
             <ul>
               <li>
@@ -48,7 +51,18 @@ function Layout({ children }) {
                 </div>
                 {openMenu.usuarios && (
                   <ul className="submenu">
-                    <li><Link to="/usuarios/novo">Cadastrar Usuário</Link></li>
+                    <li>
+                      <Link
+                        to="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setOpenUsuarioModal(true);
+                        }}
+                      >
+                        Cadastrar Usuário
+                      </Link>
+                    </li>
+                    <li><Link to="/relatorios/usuarios">Listar Usuários</Link></li>
                   </ul>
                 )}
               </li>
@@ -59,7 +73,6 @@ function Layout({ children }) {
                 {openMenu.relatorios && (
                   <ul className="submenu">
                     <li><Link to="/relatorios/chamados">Todos os Chamados</Link></li>
-                    <li><Link to="/relatorios/usuarios">Todos os Usuários</Link></li>
                   </ul>
                 )}
               </li>
@@ -73,11 +86,6 @@ function Layout({ children }) {
       </div>
     </div>
   );
-
-  
-
 }
-
-
 
 export default Layout;
