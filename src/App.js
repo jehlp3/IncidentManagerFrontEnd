@@ -5,6 +5,7 @@ import ChamadoDetalhes from './pages/ChamadoDetalhes';
 import CadastroUsuario from './pages/CadastroUsuario';
 import { AuthProvider } from './context/AuthContext';
 import Layout from './components/Layout';
+import Dashboard from './pages/Dashboard'; 
 
 // IMPORTAR novos componentes
 import RelatorioChamados from './pages/RelatorioChamados';
@@ -19,12 +20,14 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
 
+
           {/* Rotas protegidas: com Header e Sidebar */}
           <Route path="/chamados" element={<Layout><Chamados /></Layout>} />
           <Route path="/chamados/:id" element={<Layout><ChamadoDetalhes /></Layout>} />
           <Route path="/usuarios/novo" element={<Layout><CadastroUsuario /></Layout>} />
           <Route path="/relatorios/chamados" element={<Layout><RelatorioChamados /></Layout>} />
           <Route path="/relatorios/usuarios" element={<Layout><RelatorioUsuarios /></Layout>} />
+          <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
         </Routes>
       </AuthProvider>
     </Router>

@@ -89,3 +89,17 @@
     font-weight: normal;
   }
   
+  /*Dashboard*/
+  .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1 1 200px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

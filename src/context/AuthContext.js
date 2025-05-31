@@ -14,26 +14,14 @@ export const AuthProvider = ({ children }) => {
     if (token) setAuthenticated(true);
   }, []);
 
-  const login = async (username, password) => {
-    console.log("Tentando login com:", username, password);
-  
-    try {
-      const res = await api.post('/auth/token', { username, password });
-      console.log("Resposta recebida do backend:", res);
-      console.log("AccessToken recebido:", res.data.accessToken);
-  
-      localStorage.setItem('token', res.data.accessToken);
-      localStorage.setItem('username', username); // << ADICIONAR AQUI
-  
-      setAuthenticated(true);
-  
-      console.log("Usuário autenticado, navegando para chamados...");
-      navigate('/chamados');
-    } catch (error) {
-      console.error("Erro no login:", error.response ? error.response.data : error.message);
-      alert('Login inválido');
-    }
-  };
+ // AuthContext.js
+const login = async (username, password) => {
+  const res = await api.post('/auth/token', { username, password });
+  localStorage.setItem('token', res.data.accessToken);
+  localStorage.setItem('username', username);
+  setAuthenticated(true);
+};
+
   
 
   const logout = () => {

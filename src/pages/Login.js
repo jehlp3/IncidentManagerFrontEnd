@@ -18,7 +18,7 @@ function Login() {
     setLoading(true);
     try {
       await login(username, password);
-      navigate('/chamados');
+      navigate('/dashboard');
     } catch (error) {
       toast.error('Usuário ou senha inválidos!');
     } finally {
