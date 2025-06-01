@@ -42,6 +42,7 @@ function Layout({ children }) {
                 {openMenu.chamados && (
                   <ul className="submenu">
                     <li><Link to="/chamados">Listar Chamados</Link></li>
+                    <li><Link to="/dashboard">Dashboard</Link></li>
                   </ul>
                 )}
               </li>

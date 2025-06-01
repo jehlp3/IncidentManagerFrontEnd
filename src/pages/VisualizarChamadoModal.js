@@ -1,3 +1,5 @@
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
 import {
   Modal,
@@ -78,17 +80,64 @@ export default function VisualizarChamadoModal({
       .then(() => {
         setNovaMensagem("");
         setNovoAnexo(null);
-        return api.get(`/chamados/${chamadoId}/interacoes`);
+        return Promise.all([
+          api.get(`/chamados/${chamadoId}`),
+          api.get(`/chamados/${chamadoId}/interacoes`),
+        ]);
       })
-      .then((res) => setInteracoes(res.data))
+      .then(([chamadoRes, interacoesRes]) => {
+        setChamado(chamadoRes.data);
+        setInteracoes(interacoesRes.data);
+      })
+
       .catch((err) => console.error(err));
   };
+const handleResolucaoDoChamado = () => {
+  if (!novaMensagem.trim()) {
+    toast.warning('Para resolver o chamado, preencha a mensagem da interação.');
+    return;
+  }
+
+  const payload = {
+    mensagem: novaMensagem,
+    anexos: novoAnexo ? [novoAnexo] : [],
+  };
+
+  api
+    .post(`/chamados/${chamadoId}/interacao`, payload)
+    .then(() => {
+      setNovaMensagem('');
+      setNovoAnexo(null);
+      return api.post(`/chamados/${chamadoId}/resolve`);
+    })
+    .then(() => {
+      toast.success('Chamado resolvido com sucesso!');
+      return Promise.all([
+        api.get(`/chamados/${chamadoId}`),
+        api.get(`/chamados/${chamadoId}/interacoes`),
+      ]);
+    })
+    .then(([chamadoRes, interacoesRes]) => {
+      setChamado(chamadoRes.data);
+      setInteracoes(interacoesRes.data);
+    })
+    .catch((err) => {
+      const mensagem =
+        err.response?.data?.message || 'Erro ao resolver o chamado.';
+      toast.error(mensagem);
+      console.error(err);
+    });
+};
+
+
 
   if (!chamado) return null;
 
   return (
     <Modal open={open} onClose={handleClose}>
       <Box sx={style}>
+        <ToastContainer />
+
         <Typography variant="h5" mb={2}>
           Detalhes do Chamado
         </Typography>
@@ -210,6 +259,18 @@ export default function VisualizarChamadoModal({
             </Box>
 
             <Box mt={2} display="flex" justifyContent="flex-end" gap={1}>
+              {chamado.status !== "RESOLVIDO" &&
+                chamado.status !== "CANCELADO" &&
+                chamado.status !== "ABERTO" && (
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={handleResolucaoDoChamado}
+                  >
+                    Resolver
+                  </Button>
+                )}
+
               <Button variant="outlined" color="error" onClick={handleClose}>
                 Voltar
               </Button>
